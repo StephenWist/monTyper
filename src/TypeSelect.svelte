@@ -1,12 +1,16 @@
 <script>
     import { createEventDispatcher } from 'svelte';
     const dispatch = createEventDispatcher();
-    let id;
+    export let id;
     let selected;
     export let types = ['Fire', 'Water', 'Grass'];
 
-    function typeUpdate() {
-        dispatch('typeUpdate', selected);
+    function typeUpdate(event) {
+        dispatch('typeUpdate', {
+            'selected':selected,
+            'id':event.target.id,
+        });
+        // console.log(event.target.id);
     }
 </script>
 
@@ -20,7 +24,7 @@
     }
 </style>
 
-<select bind:value={selected} on:change={typeUpdate} name={id}>
+<select bind:value={selected} on:change={typeUpdate} id={id}>
     {#each types as type}
         <option>{type}</option>
     {/each}

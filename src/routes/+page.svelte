@@ -41,8 +41,12 @@
         'Grass': {'Water': 2}
     };
 
+    let tmp = 0;
+
     function typeUpdated(event) {
-        alert(event.detail);
+        if (tmp != 1) { tmp = 1; };
+        alert(event.detail.selected);
+        alert(event.detail.id);
     };
 </script>
 
@@ -51,6 +55,8 @@
     <Selector on:typeUpdate={typeUpdated} />
 
     <div id='results'>
-        <Card></Card>
+        {#if tmp}
+            <Card></Card>
+        {/if}
     </div>
 </div>
