@@ -42,7 +42,7 @@
     };
 
     function typeUpdated(event) {
-        alert(event.detail.text);
+        alert(event.detail);
     };
 </script>
 
