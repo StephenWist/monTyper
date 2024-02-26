@@ -20,21 +20,6 @@
         width: 100vw;
     }
 
-    #top {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #F8D553;
-        height: 4em;   
-        width: 100%;
-    }
-
-    select {
-        padding: 5px;
-        margin: 5px 5px;
-        border-radius: 5px;
-    }
-
     #results {
         display: flex;
         background-color:#054A91;
@@ -44,55 +29,28 @@
         width: 100%;
     }
 
-    .card{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: 10px;
-        width:140px;
-        height: 70px;
-        background-color: rgb(226, 236, 225);
-        border-radius: 5px;
-    }
-
-    .card>div {
-        height:20px;
-        width:70px;
-        background-color: #332E3C;
-        border-radius: 5px;
-    }
-
 </style>
+
+<script>
+    import Card from "../Card.svelte";
+    import Selector from "../Selector.svelte";
+    
+    let super_effective = {
+        'Fire': {'Grass': 2},
+        'Water': {'Fire': 2},
+        'Grass': {'Water': 2}
+    };
+
+    function typeUpdated(event) {
+        alert(event.detail.text);
+    };
+</script>
 
 <div id='main-wrapper'>
     <h1>Pokemon Gen 2-4 Type Effectiveness Lookup PTEL</h1>
-    <div id='top'>
-        <select name='gen'>
-            <option value='4'>4</option>
-        </select>
-        <select name='type1'>
-            <option value='fire'>Fire</option>
-            <option value='water'>Water</option>
-            <option value='grass'>Grass</option>
-        </select>
-        <select name='type2     '>
-            <option value='fire'>Fire</option>
-            <option value='water'>Water</option>
-            <option value='grass'>Grass</option>
-        </select>
-    </div>
+    <Selector on:typeUpdate={typeUpdated} />
+
     <div id='results'>
-        <div class='2Resist card'>
-            <p>2X Resistance</p>
-            <div></div>
-        </div>
-        <div class='notEffective card'>
-            <p>Not Effected By</p>
-            <div></div>
-        </div>
-        <div class='2Effective card'>
-            <p>2X Effectiveness</p>
-            <div></div>
-        </div>
+        <Card></Card>
     </div>
 </div>
