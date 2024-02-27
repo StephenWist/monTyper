@@ -2,19 +2,16 @@
     import { createEventDispatcher } from 'svelte';
     const dispatch = createEventDispatcher();
     export let id;
-    let selected;
-    export let types = ['Fire', 'Water', 'Grass'];
+    export let selected;
+    export let types = ['Normal','Fighting','Ghost'];
 
     function typeUpdate(event) {
         dispatch('typeUpdate', {
             'selected':selected,
             'id':event.target.id,
         });
-        // console.log(event.target.id);
     }
 </script>
-
-<!-- {@debug selected} -->
 
 <style>
     select {

@@ -1,8 +1,8 @@
 <script>
     import GenSelect from "./GenSelect.svelte";
     import TypeSelect from "./TypeSelect.svelte";
-    let t1 = 'type1';
-    let t2 = 'type2';
+    export let t1 = 'type1';
+    export let t2 = 'type2';
 </script>
 
 <style>
@@ -19,6 +19,6 @@
 <div id='selector'>
     <GenSelect></GenSelect>
     {#each [t1, t2] as id_}
-        <TypeSelect id={id_} on:typeUpdate/>
+        <TypeSelect bind:id={id_} on:typeUpdate/>
     {/each}
 </div>
