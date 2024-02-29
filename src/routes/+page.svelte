@@ -111,16 +111,21 @@
         console.log(t2 + 'Attacking');
         console.log(t2e.Attacking);
         // get all types in common
-        let commonA = _.intersection(Object.keys(t1e.Attacking), Object.keys(t2e.Attacking));
-        // get all unique types
-        // let all_types = Object.assign(t1e.Attacking, t2e.Attacking);
-        // console.log(commonA);
-        // console.log(uniqA);
+        let t1A_keys = Object.keys(t1e.Attacking);
+        let t2A_keys = Object.keys(t2e.Attacking);
+        let commonA = _.intersection(t1A_keys, t2A_keys);
+        let uniqA = _.xor(t1A_keys, t2A_keys);
+        // combine all unique types
+        uniqA.forEach(t => {
+            t1A_keys.includes(t) ? dual_type.Attacking[t] = t1e.Attacking[t] : dual_type.Attacking[t] = t2e.Attacking;
+        });
 
         commonA.forEach(t => {
-            // uniqA[t] = t1e.Attacking[t] * t2e.Attacking[t];
+            dual_type.Attacking[t] =  t1e.Attacking[t] * t2e.Attacking[t];
             console.log(t, t1e.Attacking[t], t2e.Attacking[t], t1e.Attacking[t] * t2e.Attacking[t]);
         });
+
+        console.log('dual type', dual_type);
     };
 </script>
 
