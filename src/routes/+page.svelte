@@ -106,26 +106,22 @@
         let t2e = {...type_effectiveness[t2]};
         let t1e = {...type_effectiveness[t1]};
 
-        console.log(t1 + ' Attacking');
-        console.log(t1e.Attacking);
-        console.log(t2 + 'Attacking');
-        console.log(t2e.Attacking);
-        // get all types in common
+        // get all types in common and exclusive
         let t1A_keys = Object.keys(t1e.Attacking);
         let t2A_keys = Object.keys(t2e.Attacking);
+        let t1D_keys = Object.keys(t1e.Defending);
+        let t2D_keys = Object.keys(t2e.Defending);
         let commonA = _.intersection(t1A_keys, t2A_keys);
         let uniqA = _.xor(t1A_keys, t2A_keys);
+        let commonD = _.intersection(t1D_keys, t2D_keys);
+        let uniqD = _.xor(t2D_keys, t1D_keys);
+
         // combine all unique types
-        uniqA.forEach(t => {
-            t1A_keys.includes(t) ? dual_type.Attacking[t] = t1e.Attacking[t] : dual_type.Attacking[t] = t2e.Attacking;
-        });
-
-        commonA.forEach(t => {
-            dual_type.Attacking[t] =  t1e.Attacking[t] * t2e.Attacking[t];
-            console.log(t, t1e.Attacking[t], t2e.Attacking[t], t1e.Attacking[t] * t2e.Attacking[t]);
-        });
-
-        console.log('dual type', dual_type);
+        uniqA.forEach(t => { t1A_keys.includes(t) ? dual_type.Attacking[t] = t1e.Attacking[t] : dual_type.Attacking[t] = t2e.Attacking[t]; });
+        commonA.forEach(t => { dual_type.Attacking[t] =  t1e.Attacking[t] * t2e.Attacking[t]; });
+        uniqD.forEach(t => { t1D_keys.includes(t) ? dual_type.Defending[t] = t1e.Defending[t] : dual_type.Defending[t] = t2e.Defending[t]; });
+        commonD.forEach(t => { dual_type.Defending[t] =  t1e.Defending[t] * t2e.Defending[t]; });
+        console.log('dual type ', dual_type);
     };
 </script>
 
