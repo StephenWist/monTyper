@@ -23,8 +23,9 @@
     #results {
         display: flex;
         background-color:#054A91;
+        flex-wrap: wrap;
         justify-content: center;
-        column-gap: 10px;
+        column-gap: 8px;
         height: 100%;
         width: 100%;
     }
@@ -122,6 +123,7 @@
         uniqD.forEach(t => { t1D_keys.includes(t) ? dual_type.Defending[t] = t1e.Defending[t] : dual_type.Defending[t] = t2e.Defending[t]; });
         commonD.forEach(t => { dual_type.Defending[t] =  t1e.Defending[t] * t2e.Defending[t]; });
         console.log('dual type ', dual_type);
+        // sort dual type alphabetically
     };
 </script>
 
@@ -130,13 +132,26 @@
     <Selector on:typeUpdate={typeUpdated} />
     <div id='results'>
         {#if t1 != t2}
+        <div id='Attack'>
             {#await dual_type}
                 <p>working...</p>
             {:then dt}
+                <h3>Attacking</h3>
                 {#each Object.keys(dt.Attacking).map((key) => [key, dt.Attacking[key]]) as k}
                     <Card eff={k[1]} type={k[0]} />
                 {/each}
             {/await}
+        </div>
+        <div id='Defend'>
+            {#await dual_type}
+                <p>working...</p>
+            {:then dt}
+                <h3>Defending</h3>
+                {#each Object.keys(dt.Defending).map((key) => [key, dt.Defending[key]]) as k}
+                    <Card eff={k[1]} type={k[0]} />
+                {/each}
+            {/await}
+        </div>
         {/if}
     </div>
 </div>

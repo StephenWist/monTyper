@@ -10,23 +10,23 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 10px;
-        width:140px;
-        height: 70px;
+        margin: 5px;
+        width:100px;
+        height: 55px;
         background-color: rgb(226, 236, 225);
         border-radius: 5px;
     }
 
-    .card>div {
-        height:20px;
-        width:70px;
-        background-color: #332E3C;
-        border-radius: 5px;
+    p {
+        margin: 5px;
     }
 </style>
 
 <div class={className}>
     <p>{type}</p>
-    <p>{eff} Effective</p>
-    <div></div>
+    {#if eff != 0}
+        <p>{eff} Effective</p>
+    {:else}
+        <p>No Effect</p>
+    {/if}
 </div>
