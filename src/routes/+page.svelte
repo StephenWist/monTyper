@@ -130,11 +130,13 @@
     <Selector on:typeUpdate={typeUpdated} />
     <div id='results'>
         {#if t1 != t2}
-            {#each [t1] as t}
-                {#each [t] as f}
-                    <Card class='card se' eff=f />
+            {#await dual_type}
+                <p>working...</p>
+            {:then dt}
+                {#each Object.keys(dt.Attacking).map((key) => [key, dt.Attacking[key]]) as k}
+                    <Card eff={k} />
                 {/each}
-            {/each}
+            {/await}
         {/if}
     </div>
 </div>

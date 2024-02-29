@@ -31,6 +31,7 @@
         <p>2X Resist</p>
     {:else}
         <p>No Effect</p>
+        <p>{eff}</p>
     {/if}
     <div></div>
 </div>
