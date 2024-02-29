@@ -31,12 +31,12 @@
 
 </style>
 
-<script>
+<script lang='ts'>
     import Card from "../Card.svelte";
     import Selector from "../Selector.svelte";
     import _ from 'lodash';
     
-    const type_effectiveness = {
+    let type_effectiveness = {
         'Normal': {'Attacking': {
                         'Rock': 0.5,
                         'Ghost': 0,
@@ -75,36 +75,19 @@
                 'Ice':2,
                 'Dark':2
             },
-        'Defending': {
-            'Flying':2,
-            'Rock':0.5,
-            'Bug':0.5,
-            'Psychic':2,
-            'Dark':0.5
-        }
+            'Defending': {
+                'Flying':2,
+                'Rock':0.5,
+                'Bug':0.5,
+                'Psychic':2,
+                'Dark':0.5
+            }
         },
     };
 
     let t1 = 'Normal';
     let t2 = 'Normal';
-    let t1e;
-    let t2e;
-    let att;
-    let def;
-    let dualType = {
-        'Attacking': {},
-        'Defending': {}
-    };
-    
-
-    function removeDuplicates(arr) {
-        let unique = arr.reduce(function (acc, curr) {
-            if (!acc.includes(curr))
-                acc.push(curr);
-            return acc;
-        }, []);
-        return unique;
-    };
+    let dual_type = {'Attacking':{}, 'Defending':{}};
 
     function typeUpdated(event) {
         // alert(event.detail.selected);
@@ -114,33 +97,30 @@
         } else {
             t2 = event.detail.selected;
         };
-        t1e = type_effectiveness[t1];
-        t2e = type_effectiveness[t2];
+
+        if ( t1 == t2 ) {
+            console.log('Same types, nothing to do.');
+            return
+        };
+
+        let t2e = {...type_effectiveness[t2]};
+        let t1e = {...type_effectiveness[t1]};
+
         console.log(t1 + ' Attacking');
         console.log(t1e.Attacking);
         console.log(t2 + 'Attacking');
         console.log(t2e.Attacking);
+        // get all types in common
+        let commonA = _.intersection(Object.keys(t1e.Attacking), Object.keys(t2e.Attacking));
+        // get all unique types
+        // let all_types = Object.assign(t1e.Attacking, t2e.Attacking);
+        // console.log(commonA);
+        // console.log(uniqA);
 
-        // add all types that are not in common
-        att = _.merge(t1e.Attacking,t2e.Attacking);
-        def = _.merge(t1e.Defending,t2e.Defending);
-        console.log('Combined attacking before merge');
-        console.log(att);
-        // Combine common attacking types
-        for ( const type in Object.keys(t1e.Attacking) ) {
-            if ( Object.keys(t2e.Attacking).includes(type) ) {
-                dualType.Attacking[type] = t1e.Attacking[type] * t2e.Attacking[type];
-            }
-        };
-        // Combine commmon defending types
-        for ( const type in Object.keys(t1e.Defending) ) {
-            if ( Object.keys(t2e.Defending).includes(type) ) {
-                dualType.Defending[type] = t1e.Defending[type] * t2e.Defending[type];
-            }
-        }
-        let dualTypeAtt = _.merge(att, dualType.Attacking);
-        console.log('Combined Attacking after merge')
-        console.log(dualTypeAtt);
+        commonA.forEach(t => {
+            // uniqA[t] = t1e.Attacking[t] * t2e.Attacking[t];
+            console.log(t, t1e.Attacking[t], t2e.Attacking[t], t1e.Attacking[t] * t2e.Attacking[t]);
+        });
     };
 </script>
 
