@@ -2,6 +2,7 @@
     let className = 'card';
     export { className as class };
     export let eff;
+    export let type;
 </script>
 
 <style>
@@ -25,13 +26,7 @@
 </style>
 
 <div class={className}>
-    {#if eff == 'se'}
-        <p>2X Effective</p>
-    {:else if eff == 'ne'}
-        <p>2X Resist</p>
-    {:else}
-        <p>No Effect</p>
-        <p>{eff}</p>
-    {/if}
+    <p>{type}</p>
+    <p>{eff} Effective</p>
     <div></div>
 </div>

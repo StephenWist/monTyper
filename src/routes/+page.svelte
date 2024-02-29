@@ -134,7 +134,7 @@
                 <p>working...</p>
             {:then dt}
                 {#each Object.keys(dt.Attacking).map((key) => [key, dt.Attacking[key]]) as k}
-                    <Card eff={k} />
+                    <Card eff={k[1]} type={k[0]} />
                 {/each}
             {/await}
         {/if}
