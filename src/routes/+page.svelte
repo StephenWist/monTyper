@@ -89,6 +89,13 @@
     let t1 = 'Normal';
     let t2 = 'Normal';
     let dual_type = {'Attacking':{}, 'Defending':{}};
+    let attacking; let defending;
+
+    let comparer = function(a,b) {
+            if (a[0] < b[0]) return -1;
+            if (a[0] > b[0]) return 1;
+            return 0;
+        };
 
     function typeUpdated(event) {
         // alert(event.detail.selected);
@@ -123,7 +130,6 @@
         uniqD.forEach(t => { t1D_keys.includes(t) ? dual_type.Defending[t] = t1e.Defending[t] : dual_type.Defending[t] = t2e.Defending[t]; });
         commonD.forEach(t => { dual_type.Defending[t] =  t1e.Defending[t] * t2e.Defending[t]; });
         console.log('dual type ', dual_type);
-        // sort dual type alphabetically
     };
 </script>
 
@@ -137,8 +143,9 @@
                 <p>working...</p>
             {:then dt}
                 <h3>Attacking</h3>
-                {#each Object.keys(dt.Attacking).map((key) => [key, dt.Attacking[key]]) as k}
-                    <Card eff={k[1]} type={k[0]} />
+                <!-- convert property/value pairs into arrays and sort alphabetically -->
+                {#each Object.entries(dual_type.Attacking).sort(comparer) as [type, efffectiveness]}
+                    <Card eff={efffectiveness} type={type} />
                 {/each}
             {/await}
         </div>
@@ -147,8 +154,8 @@
                 <p>working...</p>
             {:then dt}
                 <h3>Defending</h3>
-                {#each Object.keys(dt.Defending).map((key) => [key, dt.Defending[key]]) as k}
-                    <Card eff={k[1]} type={k[0]} />
+                {#each Object.entreis(dt.Defending).sort(comparer) as [type, efffectiveness]}
+                    <Card eff={efffectiveness} type={type} />
                 {/each}
             {/await}
         </div>
