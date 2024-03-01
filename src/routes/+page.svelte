@@ -157,7 +157,6 @@
             {#await dual_type}
                 <p>working...</p>
             {:then dt}
-                <h3>Attacking</h3>
                 <!-- sort types alphabetically -->
                 {#each Object.entries(dual_type.Attacking).sort(comparer) as [type, effectiveness]}
                     <Card eff={effectiveness} type={type} />
@@ -168,7 +167,6 @@
         {#await dual_type}
             <p>working...</p>
         {:then dt}
-            <h3>Defending</h3>
             {#each Object.entries(dt.Defending).sort(comparer) as [type, effectiveness]}
                 <Card eff={effectiveness} type={type} />
             {/each}
