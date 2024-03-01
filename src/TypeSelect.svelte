@@ -15,9 +15,10 @@
 
 <style>
     select {
-    padding: 5px;
-    margin: 5px 5px;
-    border-radius: 5px;
+        font-size: 1.2em;
+        border: 5px;
+        margin: 5px;
+        border-radius: 5px;
     }
 </style>
 

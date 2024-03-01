@@ -5,6 +5,7 @@
 
 <style>
     select {
+    font-size: 1.2em;
     padding: 5px;
     margin: 5px 5px;
     border-radius: 5px;

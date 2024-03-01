@@ -7,29 +7,41 @@
         black: 332E3C
     */
 
+    body {
+        margin: 0;
+    }
+
     #main-wrapper {
         display: flex;
         flex-direction: column;
         align-items: center;
         font-size: 14px;
         row-gap: 10px;
-        margin: 10px;
         font-family: Helvetica, "Trebuchet MS", Verdana, sans-serif;
         background-color: #ffffff;
         height: 100vh;
         width: 100vw;
     }
 
+    #result-title {
+        display: flex;
+        gap: 20px;
+        background-color: #ffffff;
+    }
+
     #results {
         display: flex;
         background-color:#054A91;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: center;    
         column-gap: 8px;
         height: 100%;
         width: 100%;
     }
 
+    #Attack, #Defend {
+        max-height: 30%;
+    }
 </style>
 
 <script lang='ts'>
@@ -98,8 +110,6 @@
         };
 
     function typeUpdated(event) {
-        // alert(event.detail.selected);
-        // alert(event.detail.id);
         if (event.detail.id == 'type1') {
             t1 = event.detail.selected;
         } else {
@@ -124,10 +134,11 @@
         let commonD = _.intersection(t1D_keys, t2D_keys);
         let uniqD = _.xor(t2D_keys, t1D_keys);
 
-        // combine all unique types
+        // combine all unique types into final dual types object
         uniqA.forEach(t => { t1A_keys.includes(t) ? dual_type.Attacking[t] = t1e.Attacking[t] : dual_type.Attacking[t] = t2e.Attacking[t]; });
-        commonA.forEach(t => { dual_type.Attacking[t] =  t1e.Attacking[t] * t2e.Attacking[t]; });
         uniqD.forEach(t => { t1D_keys.includes(t) ? dual_type.Defending[t] = t1e.Defending[t] : dual_type.Defending[t] = t2e.Defending[t]; });
+        // calculate common type effectiveness
+        commonA.forEach(t => { dual_type.Attacking[t] =  t1e.Attacking[t] * t2e.Attacking[t]; });
         commonD.forEach(t => { dual_type.Defending[t] =  t1e.Defending[t] * t2e.Defending[t]; });
         console.log('dual type ', dual_type);
     };
@@ -136,6 +147,10 @@
 <div id='main-wrapper'>
     <h1>Pokemon Gen 2-4 Type Effectiveness Lookup PTEL</h1>
     <Selector on:typeUpdate={typeUpdated} />
+    <div id='result-title'>
+        <h3>Attacking</h3>
+        <h3>Defending</h3>
+    </div>
     <div id='results'>
         {#if t1 != t2}
         <div id='Attack'>
@@ -143,21 +158,21 @@
                 <p>working...</p>
             {:then dt}
                 <h3>Attacking</h3>
-                <!-- convert property/value pairs into arrays and sort alphabetically -->
-                {#each Object.entries(dual_type.Attacking).sort(comparer) as [type, efffectiveness]}
-                    <Card eff={efffectiveness} type={type} />
+                <!-- sort types alphabetically -->
+                {#each Object.entries(dual_type.Attacking).sort(comparer) as [type, effectiveness]}
+                    <Card eff={effectiveness} type={type} />
                 {/each}
             {/await}
         </div>
         <div id='Defend'>
-            {#await dual_type}
-                <p>working...</p>
-            {:then dt}
-                <h3>Defending</h3>
-                {#each Object.entreis(dt.Defending).sort(comparer) as [type, efffectiveness]}
-                    <Card eff={efffectiveness} type={type} />
-                {/each}
-            {/await}
+        {#await dual_type}
+            <p>working...</p>
+        {:then dt}
+            <h3>Defending</h3>
+            {#each Object.entries(dt.Defending).sort(comparer) as [type, effectiveness]}
+                <Card eff={effectiveness} type={type} />
+            {/each}
+        {/await}
         </div>
         {/if}
     </div>
