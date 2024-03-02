@@ -4,6 +4,9 @@
 </script>
 
 <style>
+    label {
+        font-size:large;
+    }
     select {
     font-size: 1.2em;
     padding: 5px;

@@ -7,10 +7,6 @@
         black: 332E3C
     */
 
-    body {
-        margin: 0;
-    }
-
     #main-wrapper {
         display: flex;
         flex-direction: column;
@@ -21,12 +17,6 @@
         background-color: #ffffff;
         height: 100vh;
         width: 100vw;
-    }
-
-    #result-title {
-        display: flex;
-        gap: 20px;
-        background-color: #ffffff;
     }
 
     #results {
@@ -116,6 +106,7 @@
     <h1>monTyper</h1>
     <h2>Look up a Pokemon's weaknesses</h2>
     <Selector on:typeUpdate={typeUpdated} />
+    <h3>Defending Effectiveness</h3>
     <div id='results'>
         {#if t1 != t2}
         {#await dual_type}
