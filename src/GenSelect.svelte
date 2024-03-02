@@ -1,6 +1,6 @@
 <script>
     export let name='GenSelect';
-    export let genVal=4;
+    export let genVal='2-4';
 </script>
 
 <style>

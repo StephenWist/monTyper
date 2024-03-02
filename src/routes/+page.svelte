@@ -58,6 +58,129 @@
                 'Psychic':2,
                 'Dark':0.5
         },
+        'Poison': {
+            'Poison':0.5,
+            'Ground':2,
+            'Bug':0.5,
+            'Grass':0.5,
+            'Psychic':2
+        },
+        'Flying': {
+            'Fighting':0.5,
+            'Ground':0,
+            'Rock':2,
+            'Grass':0.5,
+            'Electric':2,
+            'Ice':2
+        },
+        'Ground': {
+            'Poison':0.5,
+            'Rock':0.5,
+            'Water':2,
+            'Grass':2,
+            'Electric':0,
+            'Ice':2
+        },
+        'Rock': {
+            'Normal':0.5,
+            'Fighting':2,
+            'Flying':0.5,
+            'Poison':0.5,
+            'Ground':2,
+            'Steel':2,
+            'Fire':0.5,
+            'Water':2,
+            'Grass':2
+        },
+        'Bug': {
+            'Fighting':0.5,
+            'Flying':2,
+            'Ground':0.5,
+            'Rock':2,
+            'Fire':2,
+            'Grass':0.5
+        },
+        'Steel': {
+            'Normal':0.5,
+            'Fighting':2,
+            'Flying':0.5,
+            'Poison':0,
+            'Ground':2,
+            'Rock':0.5,
+            'Bug':0.5,
+            'Ghost':0.5,
+            'Steel':0.5,
+            'Fire':2,
+            'Grass':0.5,
+            'Psychic':0.5,
+            'Ice':0.5,
+            'Dragon':0.5,
+            'Dark':0.5
+        },
+        'Fire': {
+            'Ground':2,
+            'Rock':2,
+            'Bug':0.5,
+            'Steel':0.5,
+            'Fire':0.5,
+            'Water':2,
+            'Grass':0.5,
+            'Ice':0.5
+        },
+        'Water': {
+            'Steel': 0.5,
+            'Fire': 0.5,
+            'Water': 0.5,
+            'Grass':2,
+            'Electric':2,
+            'Ice':0.5
+        },
+        'Grass': {
+            'Flying':2,
+            'Poison':2,
+            'Ground':0.5
+            'Bug':2,
+            'Fire':2,
+            'Water':0.5,
+            'Grass':0.5,
+            'Electric':0.5,
+            'Ice':2
+        },
+        'Electric': {
+            'Flying': 0.5,
+            'Ground':2,
+            'Steel':0.5,
+            'Electric':0.5
+        },
+        'Psychic': {
+            'Fighting':0.5,
+            'Bug':2,
+            'Ghost':2,
+            'Psychic':0.5,
+            'Dark':2
+        },
+        'Ice': {
+            'Fighting':2,
+            'Rock':2,
+            'Steel':2
+            'Fire':2
+            'Ice':0.5
+        },
+        'Dragon': {
+            'Fire':0.5,
+            'Water':0.5,
+            'Grass':0.5,
+            'Electric':0.5,
+            'Ice':2,
+            'Dragon':2
+        },
+        'Dark': {
+            'Fighting':2,
+            'Bug':2,
+            'Ghost':0.5,
+            'Psychic':0,
+            'Dark':0.5
+        }
     };
 
     // init types
@@ -104,7 +227,7 @@
 
 <div id='main-wrapper'>
     <h1>monTyper</h1>
-    <h2>Look up a Pokemon's weaknesses</h2>
+    <h2>Look up a Pokemon's dual type weaknesses.</h2>
     <Selector on:typeUpdate={typeUpdated} />
     <h3>Defending Effectiveness</h3>
     <div id='results'>
