@@ -39,10 +39,6 @@
         height: 100%;
         width: 100%;
     }
-
-    #Attack, #Defend {
-        max-height: 30%;
-    }
 </style>
 
 <script lang='ts'>
