@@ -73,10 +73,12 @@
         },
     };
 
+    // init types
     let t1 = 'Normal';
     let t2 = 'Normal';
     let dual_type = {};
     
+    // alphabetic sort
     let comparer = function(a,b) {
             if (a[0] < b[0]) return -1;
             if (a[0] > b[0]) return 1;
@@ -122,6 +124,7 @@
         {#await dual_type}
             <p>working...</p>
         {:then dt}
+            <!-- Sort alphabetically -->
             {#each Object.entries(dt).sort(comparer) as [type, effectiveness]}
                 <Card eff={effectiveness} type={type} />
             {/each}
