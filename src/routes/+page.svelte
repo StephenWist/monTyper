@@ -138,7 +138,7 @@
         'Grass': {
             'Flying':2,
             'Poison':2,
-            'Ground':0.5
+            'Ground':0.5,
             'Bug':2,
             'Fire':2,
             'Water':0.5,
@@ -162,8 +162,8 @@
         'Ice': {
             'Fighting':2,
             'Rock':2,
-            'Steel':2
-            'Fire':2
+            'Steel':2,
+            'Fire':2,
             'Ice':0.5
         },
         'Dragon': {
@@ -184,8 +184,8 @@
     };
 
     // init types
-    let t1 = 'Normal';
-    let t2 = 'Normal';
+    let t1;
+    let t2;
     let dual_type = {};
     
     // alphabetic sort
@@ -198,8 +198,10 @@
     function typeUpdated(event) {
         if (event.detail.id == 'type1') {
             t1 = event.detail.selected;
+            t2 = document.getElementById('type2');
         } else {
             t2 = event.detail.selected;
+            t1 = document.getElementById('type1');
         };
 
         if ( t1 == t2 ) {
