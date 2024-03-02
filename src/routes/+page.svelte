@@ -31,6 +31,7 @@
 
     #results {
         display: flex;
+        flex-direction: row;
         background-color:#054A91;
         flex-wrap: wrap;
         justify-content: center;    
@@ -50,59 +51,32 @@
     import _ from 'lodash';
     
     let type_effectiveness = {
-        'Normal': {'Attacking': {
-                        'Rock': 0.5,
-                        'Ghost': 0,
-                        'Steel': 0.5
-                    },
-                    'Defending': {
-                        'Fighting': 2,
+        'Normal': { 'Fighting': 2,
                         'Ghost': 0
-                    }
+                    
         },
-        'Ghost': {'Attacking': {
-                    'Normal':0,
-                    'Ghost':2,
-                    'Steel':0.5,
-                    'Psychic':2,
-                    'Dark':0.5
-                    },
-                'Defending': {
+        'Ghost': {
                     'Normal':0,
                     'Fighting':0,
                     'Poison':0.5,
                     'Bug':0.5,
                     'Ghost':2,
                     'Dark':2
-                }
+                
         },
-        'Fighting': {'Attacking': {
-                'Normal':2,
-                'Flying':0.5,
-                'Posion':0.5,
-                'Rock':2,
-                'Bug':0.5,
-                'Ghost':0,
-                'Steel':2,
-                'Psychic':0.5,
-                'Ice':2,
-                'Dark':2
-            },
-            'Defending': {
+        'Fighting': {
                 'Flying':2,
                 'Rock':0.5,
                 'Bug':0.5,
                 'Psychic':2,
                 'Dark':0.5
-            }
         },
     };
 
     let t1 = 'Normal';
     let t2 = 'Normal';
-    let dual_type = {'Attacking':{}, 'Defending':{}};
-    let attacking; let defending;
-
+    let dual_type = {};
+    
     let comparer = function(a,b) {
             if (a[0] < b[0]) return -1;
             if (a[0] > b[0]) return 1;
@@ -121,25 +95,20 @@
             return
         };
 
+        dual_type = {};
         let t2e = {...type_effectiveness[t2]};
         let t1e = {...type_effectiveness[t1]};
 
         // get all types in common and exclusive
-        let t1A_keys = Object.keys(t1e.Attacking);
-        let t2A_keys = Object.keys(t2e.Attacking);
-        let t1D_keys = Object.keys(t1e.Defending);
-        let t2D_keys = Object.keys(t2e.Defending);
-        let commonA = _.intersection(t1A_keys, t2A_keys);
-        let uniqA = _.xor(t1A_keys, t2A_keys);
-        let commonD = _.intersection(t1D_keys, t2D_keys);
-        let uniqD = _.xor(t2D_keys, t1D_keys);
+        let t1_keys = Object.keys(t1e);
+        let t2_keys = Object.keys(t2e);
+        let commonD = _.intersection(t1_keys, t2_keys);
+        let uniqD = _.xor(t2_keys, t1_keys);
 
         // combine all unique types into final dual types object
-        uniqA.forEach(t => { t1A_keys.includes(t) ? dual_type.Attacking[t] = t1e.Attacking[t] : dual_type.Attacking[t] = t2e.Attacking[t]; });
-        uniqD.forEach(t => { t1D_keys.includes(t) ? dual_type.Defending[t] = t1e.Defending[t] : dual_type.Defending[t] = t2e.Defending[t]; });
+        uniqD.forEach(t => { t1_keys.includes(t) ? dual_type[t] = t1e[t] : dual_type[t] = t2e[t]; });
         // calculate common type effectiveness
-        commonA.forEach(t => { dual_type.Attacking[t] =  t1e.Attacking[t] * t2e.Attacking[t]; });
-        commonD.forEach(t => { dual_type.Defending[t] =  t1e.Defending[t] * t2e.Defending[t]; });
+        commonD.forEach(t => { dual_type[t] =  t1e[t] * t2e[t]; });
         console.log('dual type ', dual_type);
     };
 </script>
@@ -147,31 +116,15 @@
 <div id='main-wrapper'>
     <h1>Pokemon Gen 2-4 Type Effectiveness Lookup PTEL</h1>
     <Selector on:typeUpdate={typeUpdated} />
-    <div id='result-title'>
-        <h3>Attacking</h3>
-        <h3>Defending</h3>
-    </div>
     <div id='results'>
         {#if t1 != t2}
-        <div id='Attack'>
-            {#await dual_type}
-                <p>working...</p>
-            {:then dt}
-                <!-- sort types alphabetically -->
-                {#each Object.entries(dual_type.Attacking).sort(comparer) as [type, effectiveness]}
-                    <Card eff={effectiveness} type={type} />
-                {/each}
-            {/await}
-        </div>
-        <div id='Defend'>
         {#await dual_type}
             <p>working...</p>
         {:then dt}
-            {#each Object.entries(dt.Defending).sort(comparer) as [type, effectiveness]}
+            {#each Object.entries(dt).sort(comparer) as [type, effectiveness]}
                 <Card eff={effectiveness} type={type} />
             {/each}
         {/await}
-        </div>
         {/if}
     </div>
 </div>
