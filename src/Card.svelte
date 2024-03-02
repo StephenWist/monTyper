@@ -25,7 +25,7 @@
 <div class={className}>
     <p>{type}</p>
     {#if eff != 0}
-        <p>{eff} Effective</p>
+        <p>{eff}X Effective</p>
     {:else}
         <p>No Effect</p>
     {/if}
