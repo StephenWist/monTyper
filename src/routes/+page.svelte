@@ -114,7 +114,8 @@
 </script>
 
 <div id='main-wrapper'>
-    <h1>Pokemon Gen 2-4 Type Effectiveness Lookup PTEL</h1>
+    <h1>monTyper</h1>
+    <h2>Look up a Pokemon's weaknesses</h2>
     <Selector on:typeUpdate={typeUpdated} />
     <div id='results'>
         {#if t1 != t2}
