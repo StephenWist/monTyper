@@ -13,6 +13,7 @@
     }
 </style>
 
+<label for='op'>Generation:</label>
 <select name={name}>
-    <option value={genVal}>{genVal}</option>
+    <option id='op' value={genVal}>{genVal}</option>
 </select>

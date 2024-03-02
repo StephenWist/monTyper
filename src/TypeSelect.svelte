@@ -23,6 +23,11 @@
     }
 </style>
 
+<label for={id}>
+    {#if id=='type1'}
+    Type 1: {:else} Type 2
+    {/if}
+</label>
 <select bind:value={selected} on:change={typeUpdate} id={id}>
     {#each types as type}
         <option>{type}</option>
