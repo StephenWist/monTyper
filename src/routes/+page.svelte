@@ -236,10 +236,13 @@
         {#if t1 != t2}
         {#await dual_type}
             <p>working...</p>
-        {:then dt}
+        {:then dt}}
             <!-- Sort alphabetically -->
             {#each Object.entries(dt).sort(comparer) as [type, effectiveness]}
+                <!-- Don't render neutral effectiveness -->
+                {#if effectiveness != 1}
                 <Card eff={effectiveness} type={type} />
+                {/if}
             {/each}
         {/await}
         {/if}
