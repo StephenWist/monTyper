@@ -20,6 +20,7 @@
 
     p {
         margin: 5px;
+        font-size: 1.1rem;
     }
 </style>
 
