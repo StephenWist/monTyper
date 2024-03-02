@@ -38,7 +38,7 @@
         align-content: flex-start;
         column-gap: 8px;
         height: 100%;
-        width: 60%;
+        width: 100%;
     }
 </style>
 
