@@ -16,7 +16,7 @@
 <style>
     select {
         font-size: 1.2em;
-        border: 10px;
+        border: 5px;
         margin: 5px;
         padding: 5px;
         border-radius: 5px;

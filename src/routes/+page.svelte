@@ -34,10 +34,11 @@
         flex-direction: row;
         background-color:#054A91;
         flex-wrap: wrap;
-        justify-content: center;    
+        justify-content: center;
+        align-content: flex-start;
         column-gap: 8px;
         height: 100%;
-        width: 100%;
+        width: 60%;
     }
 </style>
 
