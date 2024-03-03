@@ -3,7 +3,9 @@
     const dispatch = createEventDispatcher();
     export let id;
     export let selected;
-    export let types = ['Normal','Fighting','Ghost'];
+    export let types = ['Bug','Dark','Dragon','Electric','Fighting','Fire',
+                        'Flying','Ghost', 'Grass','Ground','Ice','Normal',
+                        'Poison','Psychic','Rock','Steel','Water'];
 
     function typeUpdate(event) {
         dispatch('typeUpdate', {

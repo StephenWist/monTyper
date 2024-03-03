@@ -42,7 +42,7 @@
     .Fairy { background-color: #f2adec;}
 </style>
 
-<div class='cardsss {type}'>
+<div class='card {type}'>
     <TypeImage src='../{type}.png' />
     {#if eff != 0}
         <p>{eff}X Effective</p>
