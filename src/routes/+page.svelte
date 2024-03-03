@@ -244,7 +244,6 @@
     <Selector on:typeUpdate={typeUpdated} />
     <h3>Defending Effectiveness</h3>
     <div id='results'>
-        <!-- {#if t1 != t2} -->
         {#await dual_type}
             <p>working...</p>
         {:then dt}}
@@ -256,6 +255,5 @@
                 {/if}
             {/each}
         {/await}
-        <!-- {/if} -->
     </div>
 </div>
