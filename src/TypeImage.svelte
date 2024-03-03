@@ -27,6 +27,5 @@
 					loading = false;
 					failed = true;
 			};
-            console.log(img.src);
 	})
 </script>

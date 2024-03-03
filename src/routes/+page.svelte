@@ -33,10 +33,14 @@
 </style>
 
 <script lang='ts'>
-    import Card from "../Card.svelte";
-    import Selector from "../Selector.svelte";
+    import { onMount } from 'svelte';
+    
     import _ from 'lodash';
     
+    import Card from "../Card.svelte";
+    import Selector from "../Selector.svelte";
+
+    // init types
     let type_effectiveness = {
         'Normal': { 'Fighting': 2,
                         'Ghost': 0
@@ -183,11 +187,17 @@
         }
     };
 
-    // init types
     let t1;
     let t2;
     let dual_type = {};
-    
+
+    // initial render after TypeSelectors are mounted
+    onMount(() => {
+        t2 = document.getElementById('type2').value;
+        t1 = document.getElementById('type1').value;
+        typeUpdated('onMount');
+	});
+
     // alphabetic sort
     let comparer = function(a,b) {
             if (a[0] < b[0]) return -1;
@@ -195,35 +205,36 @@
             return 0;
         };
 
-    function typeUpdated(event) {
-        if (event.detail.id == 'type1') {
-            t1 = event.detail.selected;
-            t2 = document.getElementById('type2');
-        } else {
-            t2 = event.detail.selected;
-            t1 = document.getElementById('type1');
-        };
+    function updateDualType() {
+        // calculate dual type weaknesses
 
-        if ( t1 == t2 ) {
-            console.log('Same types, nothing to do.');
-            return
-        };
-
-        dual_type = {};
         let t2e = {...type_effectiveness[t2]};
         let t1e = {...type_effectiveness[t1]};
+
+        // if not dual typing
+        if ( t1 == t2 ) {
+            dual_type = t1e;
+            return dual_type;
+        };
 
         // get all types in common and exclusive
         let t1_keys = Object.keys(t1e);
         let t2_keys = Object.keys(t2e);
         let commonD = _.intersection(t1_keys, t2_keys);
         let uniqD = _.xor(t2_keys, t1_keys);
-
         // combine all unique types into final dual types object
         uniqD.forEach(t => { t1_keys.includes(t) ? dual_type[t] = t1e[t] : dual_type[t] = t2e[t]; });
         // calculate common type effectiveness
         commonD.forEach(t => { dual_type[t] =  t1e[t] * t2e[t]; });
-        console.log('dual type ', dual_type);
+    };
+
+    function typeUpdated(event) {
+        // updates variables holding selected types and calls  updateDualType
+
+        t2 = document.getElementById('type2').value;
+        t1 = document.getElementById('type1').value;    
+
+        return updateDualType();
     };
 </script>
 
@@ -233,7 +244,7 @@
     <Selector on:typeUpdate={typeUpdated} />
     <h3>Defending Effectiveness</h3>
     <div id='results'>
-        {#if t1 != t2}
+        <!-- {#if t1 != t2} -->
         {#await dual_type}
             <p>working...</p>
         {:then dt}}
@@ -245,6 +256,6 @@
                 {/if}
             {/each}
         {/await}
-        {/if}
+        <!-- {/if} -->
     </div>
 </div>
