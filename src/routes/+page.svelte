@@ -41,19 +41,22 @@
     import Selector from "../Selector.svelte";
 
     // init types
-    let type_effectiveness = {
+    let g1_te = {
         'Normal': { 'Fighting': 2,
-                        'Ghost': 0
-                    
+                    'Ghost': 0   
         },
-        'Ghost': {
-                    'Normal':0,
+        'Ghost': { 'Normal':0,
                     'Fighting':0,
                     'Poison':0.5,
                     'Bug':0.5,
                     'Ghost':2,
-                    'Dark':2
-                
+                }
+    };
+    let gen2_5_te = {
+        'Normal': {...g1_te.Normal},
+        'Ghost': {
+                    ...g1_te.Ghost,
+                    'Dark':2 
         },
         'Fighting': {
                 'Flying':2,
@@ -186,17 +189,34 @@
             'Dark':0.5
         }
     };
-
+    let g6_plus_te = {...gen2_5_te};
+    let all_gens = {
+        '1': g1_te,
+        '2-5':gen2_5_te,
+        '6+':g6_plus_te,
+    };
     let t1;
     let t2;
     let dual_type = {};
+    let gen;
+    let gen_te = gen2_5_te;
 
     // initial render after TypeSelectors are mounted
     onMount(() => {
+        console.log("mounted");
         t2 = document.getElementById('type2').value;
         t1 = document.getElementById('type1').value;
+        genUpdated();
         typeUpdated('onMount');
 	});
+
+    function genUpdated(event) {
+        console.log('genUPdated');
+        gen = document.getElementById('genSelect').value;
+        console.log(gen);
+        gen_te = all_gens[gen];
+        updateDualType();
+    };
 
     // alphabetic sort
     let comparer = function(a,b) {
@@ -208,8 +228,8 @@
     function updateDualType() {
         // calculate dual type weaknesses
 
-        let t2e = {...type_effectiveness[t2]};
-        let t1e = {...type_effectiveness[t1]};
+        let t2e = {...gen_te[t2]};
+        let t1e = {...gen_te[t1]};
 
         // if not dual typing
         if ( t1 == t2 ) {
@@ -241,12 +261,12 @@
 <div id='main-wrapper'>
     <h1>monTyper</h1>
     <h2>Look up a Pokemon's dual type weaknesses.</h2>
-    <Selector on:typeUpdate={typeUpdated} />
+    <Selector on:genUpdate={genUpdated} on:typeUpdate={typeUpdated} />
     <h3>Defending Effectiveness</h3>
     <div id='results'>
         {#await dual_type}
             <p>working...</p>
-        {:then dt}}
+        {:then dt}
             <!-- Sort alphabetically -->
             {#each Object.entries(dt).sort(comparer) as [type, effectiveness]}
                 <!-- Don't render neutral effectiveness -->

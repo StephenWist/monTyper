@@ -17,7 +17,7 @@
 </style>
 
 <div id='selector'>
-    <GenSelect></GenSelect>
+    <GenSelect on:genUpdate />
     {#each [t1, t2] as id_}
         <TypeSelect bind:id={id_} on:typeUpdate/>
     {/each}
