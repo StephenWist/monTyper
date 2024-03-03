@@ -1,15 +1,7 @@
 <script>
     import TypeImage from "./TypeImage.svelte";
-    let className = 'card';
-    export { className as class };
     export let eff;
     export let type;
-
-    let type_colors = {'Normal':'#929DA3',
-                        'Fighting': '#CE416B',
-                        'Flying': '#8FA9DE',
-                        'Ground':'#E19F87',
-    }
 </script>
 
 <style>
@@ -50,7 +42,7 @@
     .Fairy { background-color: #f2adec;}
 </style>
 
-<div class='{className} {type}'>
+<div class='cardsss {type}'>
     <TypeImage src='../{type}.png' />
     {#if eff != 0}
         <p>{eff}X Effective</p>
