@@ -46,7 +46,7 @@
     {/if}
 </label>
 <select bind:value={selected} on:change={typeUpdate} id={id}>
-{#each types['1'] as type}
+{#each types[$gen] as type}
         <option>{type}</option>
     {/each}
 </select>
