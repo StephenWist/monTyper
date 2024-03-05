@@ -34,7 +34,7 @@
 
 <script lang='ts'>
     import { onMount } from 'svelte';
-    
+    import { gen } from '../stores';
     import _ from 'lodash';
     
     import Card from "../Card.svelte";
@@ -219,24 +219,25 @@
     let t1;
     let t2;
     let dual_type = {};
-    let gen;
     let gen_te = gen2_5_te;
+    let illegal_gen_types = false;
 
     // initial render after TypeSelectors are mounted
     onMount(() => {
         console.log("mounted");
         t2 = document.getElementById('type2').value;
         t1 = document.getElementById('type1').value;
-        genUpdated();
-        typeUpdated('onMount');
+        $gen = document.getElementById('genSelect').value;
+        return typeUpdated('onMount');
 	});
 
     function genUpdated(event) {
         console.log('genUPdated');
-        gen = document.getElementById('genSelect').value;
-        console.log(gen);
-        gen_te = all_gens[gen];
-        updateDualType();
+        // gen = document.getElementById('genSelect').value;
+        console.log($gen);
+        
+        gen_te = all_gens[$gen];
+        return typeUpdated();
     };
 
     // alphabetic sort
@@ -247,8 +248,13 @@
         };
 
     function updateDualType() {
-        // calculate dual type weaknesses
+        illegal_gen_types = false;
+        // if (gen == '1' && ( ['Steel','Dark','Fairy'].includes(t1) || ['Steel','Dark','Fairy'].includes(t2) ) ) {
+        //     illegal_gen_types = true;
+        //     return
+        // };
 
+        // calculate dual type weaknesses
         let t2e = {...gen_te[t2]};
         let t1e = {...gen_te[t1]};
 
@@ -269,11 +275,11 @@
         commonD.forEach(t => { dual_type[t] =  t1e[t] * t2e[t]; });
     };
 
-    function typeUpdated(event) {
+    function typeUpdated() {
         // updates variables holding selected types and calls  updateDualType
         t2 = document.getElementById('type2').value;
         t1 = document.getElementById('type1').value;    
-
+        
         return updateDualType();
     };
 </script>
@@ -281,19 +287,23 @@
 <div id='main-wrapper'>
     <h1>monTyper</h1>
     <h2>Look up a Pokemon's dual type weaknesses.</h2>
-    <Selector on:genUpdate={genUpdated} on:typeUpdate={typeUpdated} />
+    <Selector  on:genUpdate={genUpdated} on:typeUpdate={typeUpdated} />
     <h3>Weaknesses and Resistances</h3>
     <div id='results'>
-        {#await dual_type}
-            <p>working...</p>
-        {:then dt}
-            <!-- Sort alphabetically -->
-            {#each Object.entries(dt).sort(comparer) as [type, effectiveness]}
-                <!-- Don't render neutral effectiveness -->
-                {#if effectiveness != 1}
-                <Card eff={effectiveness} type={type} />
-                {/if}
-            {/each}
-        {/await}
+        {#if !illegal_gen_types}
+            {#await dual_type}
+                <p>working...</p>
+            {:then dt}
+                <!-- Sort alphabetically -->
+                {#each Object.entries(dt).sort(comparer) as [type, effectiveness]}
+                    <!-- Don't render neutral effectiveness -->
+                    {#if effectiveness != 1}
+                    <Card eff={effectiveness} type={type} />
+                    {/if}
+                {/each}
+            {:catch error}        
+                <h2 style='color:red'>{error.message}</h2>
+            {/await}
+        {/if}
     </div>
 </div>

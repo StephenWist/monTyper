@@ -1,9 +1,10 @@
 <script>
-    import { SvelteComponentTyped, createEventDispatcher } from "svelte";
+    import { createEventDispatcher } from "svelte";
+    import { gen } from "./stores";
     const dispatch = createEventDispatcher();
     export let genVals=['1','2-5','6+'];
     export let selected;
-
+    
     function genUpdate(event) {
         dispatch('genUpdate', {
             'selected':selected,
@@ -26,8 +27,8 @@
 </style>
 
 <label for='genSelect'>Generation:</label>
-<select bind:value={selected} on:change={genUpdate} id='genSelect'>
-    {#each genVals as gen}
-        <option value={gen}>{gen}</option>
+<select bind:value={$gen} on:change={genUpdate} id='genSelect'>
+    {#each genVals as g}
+        <option value={g}>{g}</option>
     {/each}>
     </select>

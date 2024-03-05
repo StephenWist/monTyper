@@ -1,11 +1,23 @@
 <script>
     import { createEventDispatcher } from 'svelte';
+    import { gen } from './stores';
     const dispatch = createEventDispatcher();
     export let id;
     export let selected;
-    export let types = ['Bug','Dark','Dragon','Electric','Fighting','Fire',
+    let gen6 = ['Bug','Dark','Dragon','Electric','Fighting','Fire',
                         'Flying','Ghost', 'Grass','Ground','Ice','Normal',
-                        'Poison','Psychic','Rock','Steel','Water'];
+                        'Poison','Psychic','Rock','Steel','Water','Fairy']
+    let gen2_5 = ['Bug','Dark','Dragon','Electric','Fighting','Fire',
+                        'Flying','Ghost', 'Grass','Ground','Ice','Normal',
+                        'Poison','Psychic','Rock','Steel','Water']
+    let gen1 = ['Bug','Dragon','Electric','Fighting','Fire',
+                        'Flying','Ghost', 'Grass','Ground','Ice','Normal',
+                        'Poison','Psychic','Rock','Water'];
+
+    let types =  {'1':gen1,
+                '2-5':gen2_5,
+                '6+':gen6
+            };
 
     function typeUpdate(event) {
         dispatch('typeUpdate', {
@@ -34,7 +46,7 @@
     {/if}
 </label>
 <select bind:value={selected} on:change={typeUpdate} id={id}>
-    {#each types as type}
+{#each types['1'] as type}
         <option>{type}</option>
     {/each}
 </select>

@@ -1,8 +1,10 @@
 <script>
+    import { gen } from "./stores";
     import GenSelect from "./GenSelect.svelte";
     import TypeSelect from "./TypeSelect.svelte";
     export let t1 = 'type1';
     export let t2 = 'type2';
+
 </script>
 
 <style>
