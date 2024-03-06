@@ -1,5 +1,5 @@
-<script>
-    import { createEventDispatcher } from 'svelte';
+<script lang='ts'>
+    import { createEventDispatcher, onMount } from 'svelte';
     import { gen } from './stores';
     const dispatch = createEventDispatcher();
     export let id;
@@ -18,6 +18,10 @@
                 '2-5':gen2_5,
                 '6+':gen6
             };
+
+    onMount(() => {
+        console.log('types select mounted id: ', {id});
+    });
 
     function typeUpdate(event) {
         dispatch('typeUpdate', {
@@ -46,7 +50,7 @@
     {/if}
 </label>
 <select bind:value={selected} on:change={typeUpdate} id={id}>
-{#each types['1'] as type}
+{#each types[$gen] as type}
         <option>{type}</option>
-    {/each}
+{/each}
 </select>

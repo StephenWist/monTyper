@@ -1,4 +1,4 @@
-<script>
+<script lang='ts'>
     import { gen } from "./stores";
     import GenSelect from "./GenSelect.svelte";
     import TypeSelect from "./TypeSelect.svelte";

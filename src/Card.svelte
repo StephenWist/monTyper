@@ -1,4 +1,4 @@
-<script>
+<script lang='ts'>
     import TypeImage from "./TypeImage.svelte";
     export let eff;
     export let type;

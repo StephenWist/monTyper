@@ -232,10 +232,7 @@
 	});
 
     function genUpdated(event) {
-        console.log('genUPdated');
-        // gen = document.getElementById('genSelect').value;
-        console.log($gen);
-        
+        console.log('genUPdated ', $gen);
         gen_te = all_gens[$gen];
         return typeUpdated();
     };
@@ -287,7 +284,7 @@
 <div id='main-wrapper'>
     <h1>monTyper</h1>
     <h2>Look up a Pokemon's dual type weaknesses.</h2>
-    <Selector  on:genUpdate={genUpdated} on:typeUpdate={typeUpdated} />
+    <Selector on:genUpdate={genUpdated} on:typeUpdate={typeUpdated} />
     <h3>Weaknesses and Resistances</h3>
     <div id='results'>
         {#if !illegal_gen_types}

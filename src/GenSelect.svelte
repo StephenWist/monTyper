@@ -1,4 +1,4 @@
-<script>
+<script lang='ts'>
     import { createEventDispatcher } from "svelte";
     import { gen } from "./stores";
     const dispatch = createEventDispatcher();
