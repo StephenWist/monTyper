@@ -246,10 +246,11 @@
 
     function updateDualType() {
         illegal_gen_types = false;
-        // if (gen == '1' && ( ['Steel','Dark','Fairy'].includes(t1) || ['Steel','Dark','Fairy'].includes(t2) ) ) {
-        //     illegal_gen_types = true;
-        //     return
-        // };
+        if ($gen == '1' && ( ['Steel','Dark','Fairy'].includes(t1) || ['Steel','Dark','Fairy'].includes(t2) ) ) {
+            illegal_gen_types = true;
+        } else if ($gen == '2-5' && ( t1 == 'Fairy' || t2 == 'Fairy' ) ) {
+            illegal_gen_types = true;
+        };
 
         // calculate dual type weaknesses
         let t2e = {...gen_te[t2]};
@@ -301,6 +302,8 @@
             {:catch error}        
                 <h2 style='color:red'>{error.message}</h2>
             {/await}
+        {:else}
+            <h3>You've found an error!</h3>
         {/if}
     </div>
 </div>
