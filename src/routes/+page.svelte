@@ -7,6 +7,10 @@
         black: 332E3C
     */
 
+    h2, h3 {
+        text-align: center;
+    }
+    
     #main-wrapper {
         display: flex;
         flex-direction: column;
