@@ -224,10 +224,11 @@
 
     // initial render after TypeSelectors are mounted
     onMount(() => {
-        console.log("mounted");
         t2 = document.getElementById('type2').value;
         t1 = document.getElementById('type1').value;
         $gen = document.getElementById('genSelect').value;
+        gen_te = all_gens[$gen]
+        console.log('gen t1 t2: ', $gen, t1,t2);
         return typeUpdated('onMount');
 	});
 
@@ -271,13 +272,14 @@
         uniqD.forEach(t => { t1_keys.includes(t) ? dual_type[t] = t1e[t] : dual_type[t] = t2e[t]; });
         // calculate common type effectiveness
         commonD.forEach(t => { dual_type[t] =  t1e[t] * t2e[t]; });
+        console.log('updateDualType dual_type gen_te ', dual_type, gen_te);
     };
 
     function typeUpdated() {
         // updates variables holding selected types and calls  updateDualType
         t2 = document.getElementById('type2').value;
         t1 = document.getElementById('type1').value;    
-        
+        console.log('typeUpdated gen t1 t2 ',$gen,t1,t2);
         return updateDualType();
     };
 </script>
