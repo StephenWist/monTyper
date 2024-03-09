@@ -13,7 +13,7 @@
         align-items: center;
         justify-content: center;
         background-color: #F8D553;
-        height: 4em;   
+        flex-wrap: wrap;
         width: 100%;
     }
 </style>
