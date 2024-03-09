@@ -227,13 +227,11 @@
         t2 = document.getElementById('type2').value;
         t1 = document.getElementById('type1').value;
         $gen = document.getElementById('genSelect').value;
-        gen_te = all_gens[$gen]
-        console.log('gen t1 t2: ', $gen, t1,t2);
+        gen_te = all_gens[$gen];
         return typeUpdated('onMount');
 	});
 
     function genUpdated(event) {
-        console.log('genUPdated ', $gen);
         gen_te = all_gens[$gen];
         return typeUpdated();
     };
@@ -252,7 +250,6 @@
         } else if ($gen == '2-5' && ( t1 == 'Fairy' || t2 == 'Fairy' ) ) {
             illegal_gen_types = true;
         };
-
         // calculate dual type weaknesses
         let t2e = {...gen_te[t2]};
         let t1e = {...gen_te[t1]};
@@ -272,14 +269,12 @@
         uniqD.forEach(t => { t1_keys.includes(t) ? dual_type[t] = t1e[t] : dual_type[t] = t2e[t]; });
         // calculate common type effectiveness
         commonD.forEach(t => { dual_type[t] =  t1e[t] * t2e[t]; });
-        console.log('updateDualType dual_type gen_te ', dual_type, gen_te);
     };
 
     function typeUpdated() {
         // updates variables holding selected types and calls  updateDualType
         t2 = document.getElementById('type2').value;
-        t1 = document.getElementById('type1').value;    
-        console.log('typeUpdated gen t1 t2 ',$gen,t1,t2);
+        t1 = document.getElementById('type1').value;   
         return updateDualType();
     };
 </script>
@@ -305,7 +300,7 @@
                 <h2 style='color:red'>{error.message}</h2>
             {/await}
         {:else}
-            <h3>You've found an error!</h3>
+            <h3 style='color:red'>Illegal Generation/Type Combo!</h3>
         {/if}
     </div>
 </div>
