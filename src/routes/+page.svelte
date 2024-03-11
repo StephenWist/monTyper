@@ -1,4 +1,4 @@
-<style>
+<style lang='scss'>
     /* colors
         red: FF5353
         white: ffffff
@@ -18,7 +18,7 @@
         font-size: 14px;
         row-gap: 10px;
         font-family: Helvetica, "Trebuchet MS", Verdana, sans-serif;
-        background-color: #ffffff;
+        background-color: $black;
         height: 100vh;
         width: 100vw;
     }
