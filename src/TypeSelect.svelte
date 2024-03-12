@@ -55,16 +55,11 @@
         border-radius: 5px;
     }
 </style>
-
- <label for={id}>
-     {#if id === 'type1'}
-     Type 1: {:else} Type 2:
-     {/if}
- </label>
- <!-- <select bind:value={selected} on:change={typeUpdate} id={id}>
- {#each types[$gen] as type}
-         <option>{type}</option>
- {/each}
- </select> -->
-
- <AutoComplete onChange={typeUpdate} items="{types[$gen]}" bind:selectedItem="{selected}" id={id} />
+<div>
+    <label for={id}>
+        {#if id === 'type1'}
+        Type 1: {:else} Type 2:
+        {/if}
+    </label>
+    <AutoComplete onChange={typeUpdate} items="{types[$gen]}" bind:selectedItem="{selected}" id={id} />
+</div>
