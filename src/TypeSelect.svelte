@@ -33,7 +33,10 @@
 
 <style>
     label {
-        font-size:large;
+        font-size: 1.2em;
+        border: 5px;
+        margin: 5px;
+        padding: 5px;
     }
     select {
         font-size: 1.2em;
@@ -45,7 +48,7 @@
 </style>
 
 <label for={id}>
-    {#if id=='type1'}
+    {#if id === 'type1'}
     Type 1: {:else} Type 2:
     {/if}
 </label>

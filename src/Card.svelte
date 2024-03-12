@@ -4,16 +4,17 @@
     export let type;
 </script>
 
-<style>
+<style lang='scss'>
     .card{
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 5px;
+        margin: 8px;
+        padding: 8px;
         width:140px;
         height: 70px;
         border: 2px solid black;
-        background-color: #ffffff;
+        background-color: $white;
         border-radius: 5px;
     }
 
@@ -22,29 +23,29 @@
         font-size: 1.1rem;
     }
 
-    .Normal {background-color: #929DA3;}
-    .Fighting {background-color: #CE416B;}
-    .Flying {background-color: #8FA9DE;}
-    .Ground {background-color: #E19F87;}
-    .Poison {background-color: #BF99D4;}
-    .Rock {background-color: #d3c8aa;}
-    .Bug { background-color: #add080;}
-    .Ghost { background-color: #8e97c0;}
-    .Steel { background-color: #90acb8;}
-    .Fire { background-color: #ffb68d;}
-    .Water { background-color: #8cade0;}
-    .Grass { background-color: #94cb91;}
-    .Electric { background-color: #f6dd83;}
-    .Psychic { background-color: #fa9c9d;}
-    .Ice { background-color: #9cdacd;}
-    .Dragon { background-color: #7a99cf;}
-    .Dark { background-color: #908d96;}
-    .Fairy { background-color: #f2adec;}
+    .Normal {background-color: $Normal;}
+    .Fighting {background-color: $Fighting;}
+    .Flying {background-color: $Flying;}
+    .Ground {background-color: $Ground;}
+    .Poison {background-color: $Poison;}
+    .Rock {background-color: $Rock;}
+    .Bug { background-color: $Bug;}
+    .Ghost { background-color: $Ghost;}
+    .Steel { background-color: $Steel;}
+    .Fire { background-color: $Fire;}
+    .Water { background-color: $Water;}
+    .Grass { background-color: $Grass;}
+    .Electric { background-color: $Electric;}
+    .Psychic { background-color: $Psychic;}
+    .Ice { background-color: $Ice;}
+    .Dragon { background-color: $Dragon;}
+    .Dark { background-color: $Dark;}
+    .Fairy { background-color: $Fairy;}
 </style>
 
 <div class='card {type}'>
     <TypeImage src='../{type}.png' />
-    {#if eff != 0}
+    {#if eff !== 0}
         <p>{eff}X Effective</p>
     {:else}
         <p>No Effect</p>

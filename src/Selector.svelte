@@ -1,5 +1,4 @@
 <script lang='ts'>
-    import { gen } from "./stores";
     import GenSelect from "./GenSelect.svelte";
     import TypeSelect from "./TypeSelect.svelte";
     export let t1 = 'type1';
@@ -7,14 +6,16 @@
 
 </script>
 
-<style>
+<style lang='scss'>
     #selector {
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: #F8D553;
+        background-color: $mustard;
         flex-wrap: wrap;
-        width: 100%;
+        // width: 100%;
+        // margin: 8px;
+        padding: 8px;
     }
 </style>
 
