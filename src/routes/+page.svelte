@@ -12,6 +12,8 @@
     // @media (min-width: 1200px) { ... }
 
     * {
+        font-family: Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif;
+        font-weight: normal;   
         text-align: center;
     }
 
@@ -25,8 +27,6 @@
         flex-direction: column;
         align-items: center;
         font-size: 14px;
-        row-gap: 10px;
-        font-family: Helvetica, "Trebuchet MS", Verdana, sans-serif;
         background-color: $white;
         height: 100vh;
         width: 100vw;
@@ -250,7 +250,7 @@
 
     function genUpdated() {
         genTypeEffectiveness = allGens[$gen];
-        return typeUpdated();
+        return updateDualType();
     };
 
     // alphabetic sort
@@ -291,10 +291,6 @@
     };
 
     function typeUpdated() {
-        // updates variables holding selected types and calls  updateDualType
-        // $t2 = document.getElementById('type2').value;
-        // $t1 = document.getElementById('type1').value;   
-        console.log('t1 t2 ',$t1,$t2);
         return updateDualType();
     };
 </script>
@@ -306,7 +302,6 @@
     </div>
     <Selector on:genUpdate={genUpdated} on:typeUpdate={typeUpdated} />
     <div id='results-wrapper'>
-        <h3>Weaknesses and Resistances</h3>
         <div id='results'>
             {#if !illegalGenTypes && dualTypesSorted?.length}
                 {#each dualTypesSorted as [type, effectiveness]}

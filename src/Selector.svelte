@@ -15,6 +15,7 @@
         flex-wrap: wrap;
         // width: 100%;
         // margin: 8px;
+        row-gap: 10px;
         padding: 8px;
     }
 </style>

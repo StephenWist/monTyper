@@ -16,6 +16,7 @@
         border: 2px solid black;
         background-color: $white;
         border-radius: 5px;
+        box-shadow: 1px 1px 1px black;
     }
 
     p {

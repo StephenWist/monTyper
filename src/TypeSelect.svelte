@@ -42,15 +42,11 @@
         border: 5px;
         margin: 5px;
         padding: 5px;
-    }
-    select {
-        font-size: 1.2em;
-        border: 5px;
-        margin: 5px;
-        padding: 5px;
-        border-radius: 5px;
+        /* bring selects into line with gen select */
+        margin-left: 37px;
     }
 </style>
+
 <div>
     <label for={id}>
         {#if id === 'type1'}
