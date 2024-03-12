@@ -234,9 +234,9 @@
 
     // initial render after TypeSelectors are mounted
     onMount(() => {
+        $t1 = 'Bug'; $t2 = 'Bug';
         document.getElementById('type2').value = $t2;
-        document.getElementById('type1').value = $t1
-        // not needed $gen since its set in stores.js?
+        document.getElementById('type1').value = $t1;
         $gen = document.getElementById('genSelect').value;
         genTypeEffectiveness = allGens[$gen];
         return typeUpdated('onMount');
