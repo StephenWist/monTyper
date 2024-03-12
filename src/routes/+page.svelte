@@ -229,7 +229,7 @@
         '6+':gen6PlusTypeEffectiveness,
     };
     let dualType = {};
-    let genTypeEffectiveness = gen2To5TypeEffectiveness;
+    let genTypeEffectiveness;
     let illegalGenTypes = false;
 
     // initial render after TypeSelectors are mounted
@@ -237,7 +237,8 @@
         $t1 = 'Bug'; $t2 = 'Bug';
         document.getElementById('type2').value = $t2;
         document.getElementById('type1').value = $t1;
-        $gen = document.getElementById('genSelect').value;
+        $gen = '1';
+        document.getElementById('genSelect').value = $gen;
         genTypeEffectiveness = allGens[$gen];
         return typeUpdated('onMount');
 	});
@@ -247,7 +248,7 @@
     .filter(d => d[1] !== 1)
 
 
-    function genUpdated(event) {
+    function genUpdated() {
         genTypeEffectiveness = allGens[$gen];
         return typeUpdated();
     };

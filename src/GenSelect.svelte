@@ -7,8 +7,9 @@
     let selected;
     
     function genUpdate(event) {
+        $gen = event;
         dispatch('genUpdate', {
-            'selected':selected,
+            'selected':event,
         });
     }
 </script>
@@ -29,7 +30,8 @@
     border-radius: 5px;
     }
 </style>
+
 <div>
     <label for='genSelect'>Generation:</label>
-    <AutoComplete onChange={genUpdate} items="{genVals}" bind:value={$gen} bind:selectedIem="{selected}" id='genSelect' />
+    <AutoComplete onChange={genUpdate} items="{genVals}" bind:value={$gen}  id='genSelect' />
 </div>

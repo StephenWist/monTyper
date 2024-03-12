@@ -1,6 +1,6 @@
 <script lang='ts'>
     import AutoComplete from "simple-svelte-autocomplete";
-    import { createEventDispatcher, onMount } from 'svelte';
+    import { createEventDispatcher } from 'svelte';
     import { gen, t1, t2 } from './stores';
     const dispatch = createEventDispatcher();
     export let id;
@@ -19,10 +19,6 @@
                 '2-5':gen2_5,
                 '6+':gen6
             };
-
-    onMount(() => {
-        console.log('types select mounted id: ', {id});
-    });
 
     function typeUpdate() {
         console.log(selected, id);
