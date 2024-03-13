@@ -1,14 +1,15 @@
 <script lang='ts'>
+    import AutoComplete from "simple-svelte-autocomplete";
     import { createEventDispatcher } from "svelte";
     import { gen } from "./stores";
     const dispatch = createEventDispatcher();
-    export let genVals=['1','2-5','6+'];
-    export let selected;
+    let genVals=['1','2-5','6+'];
+    let selected;
     
     function genUpdate(event) {
+        $gen = event;
         dispatch('genUpdate', {
-            'selected':selected,
-            'id':event.target.id,
+            'selected':event,
         });
     }
 </script>
@@ -19,6 +20,7 @@
         border: 5px;
         margin: 5px;
         padding: 5px;
+        vertical-align: middle;
     }
 
     select {
@@ -28,11 +30,14 @@
     margin: 5px 5px;
     border-radius: 5px;
     }
+
+    div {
+        display: flex;
+        align-items: center;
+    }
 </style>
 
-<label for='genSelect'>Generation:</label>
-<select bind:value={$gen} on:change={genUpdate} id='genSelect'>
-    {#each genVals as g}
-        <option value={g}>{g}</option>
-    {/each}>
-    </select>
+<div>
+    <label for='genSelect'>Generation:</label>
+    <AutoComplete onChange={genUpdate} items="{genVals}" bind:value={$gen}  id='genSelect' />
+</div>

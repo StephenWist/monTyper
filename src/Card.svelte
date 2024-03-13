@@ -14,8 +14,9 @@
         width:140px;
         height: 70px;
         border: 2px solid black;
-        background-color: $white;
+        // background-color: $white;
         border-radius: 5px;
+        box-shadow: 1px 1px 1px black;
     }
 
     p {

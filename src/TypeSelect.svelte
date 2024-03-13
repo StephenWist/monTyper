@@ -1,9 +1,10 @@
 <script lang='ts'>
-    import { createEventDispatcher, onMount } from 'svelte';
-    import { gen } from './stores';
+    import AutoComplete from "simple-svelte-autocomplete";
+    import { createEventDispatcher } from 'svelte';
+    import { gen, t1, t2 } from './stores';
     const dispatch = createEventDispatcher();
     export let id;
-    export let selected;
+    let selected;
     let gen6 = ['Bug','Dark','Dragon','Electric','Fighting','Fire',
                         'Flying','Ghost', 'Grass','Ground','Ice','Normal',
                         'Poison','Psychic','Rock','Steel','Water','Fairy']
@@ -19,17 +20,21 @@
                 '6+':gen6
             };
 
-    onMount(() => {
-        console.log('types select mounted id: ', {id});
-    });
-
-    function typeUpdate(event) {
+    function typeUpdate() {
+        console.log(selected, id);
+        if (id === 'type1') {
+            $t1 = selected;
+        } else {
+            $t2 = selected;
+        }
         dispatch('typeUpdate', {
             'selected':selected,
-            'id':event.target.id,
+            'id':id,
         });
     }
-</script>
+
+    
+ </script>
 
 <style>
     label {
@@ -37,23 +42,22 @@
         border: 5px;
         margin: 5px;
         padding: 5px;
+        vertical-align: middle;
+        /* bring selects into line with gen select in smaller screens */
+        margin-left: 42px;
     }
-    select {
-        font-size: 1.2em;
-        border: 5px;
-        margin: 5px;
-        padding: 5px;
-        border-radius: 5px;
+
+    div {
+        display: flex;
+        align-items: center;
     }
 </style>
 
-<label for={id}>
-    {#if id === 'type1'}
-    Type 1: {:else} Type 2:
-    {/if}
-</label>
-<select bind:value={selected} on:change={typeUpdate} id={id}>
-{#each types[$gen] as type}
-        <option>{type}</option>
-{/each}
-</select>
+<div>
+    <label for={id}>
+        {#if id === 'type1'}
+        Type 1: {:else} Type 2:
+        {/if}
+    </label>
+    <AutoComplete onChange={typeUpdate} items="{types[$gen]}" bind:selectedItem="{selected}" id={id} />
+</div>

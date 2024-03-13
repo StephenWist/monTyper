@@ -1,21 +1,11 @@
 <style lang='scss'>
-    /* Extra small devices (phones, less than 768px) */
-    /* No media query since this is the default in Bootstrap */
-
-    /* Small devices (tablets, 768px and up) */
-    // @media (min-width: 768px) { ... }
-
-    /* Medium devices (desktops, 992px and up) */
-    // @media (min-width: 992px) { ... }
-
-    /* Large devices (large desktops, 1200px and up) */
-    // @media (min-width: 1200px) { ... }
-
     * {
-        text-align: center;
+        font-family: Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif;
+        font-weight: normal;   
+        text-align:start;
     }
 
-    h2, h3 {
+    h1, h2, h3 {
         margin: 8px;
         padding: 8px;
     }
@@ -25,9 +15,8 @@
         flex-direction: column;
         align-items: center;
         font-size: 14px;
-        row-gap: 10px;
-        font-family: Helvetica, "Trebuchet MS", Verdana, sans-serif;
-        background-color: $white;
+        background: rgb(242,232,232);
+        background: radial-gradient(circle, rgba(242,232,232,1) 0%, rgba(90,125,124,1) 100%); 
         height: 100vh;
         width: 100vw;
     }
@@ -35,18 +24,18 @@
     #results {
         display: flex;
         flex-direction: row;
-        background-color:$blue;
         flex-wrap: wrap;
         justify-content: center;
         align-content: flex-start;
         column-gap: 8px;
         height: 100%;
+        max-width: 975px;
     }
 </style>
 
 <script lang='ts'>
     import { onMount } from 'svelte';
-    import { gen } from '../stores';
+    import { gen,t1, t2 } from '../stores';
     import _ from 'lodash';
     
     import Card from "../Card.svelte";
@@ -228,17 +217,17 @@
         '2-5':gen2To5TypeEffectiveness,
         '6+':gen6PlusTypeEffectiveness,
     };
-    let t1;
-    let t2;
     let dualType = {};
-    let genTypeEffectiveness = gen2To5TypeEffectiveness;
+    let genTypeEffectiveness;
     let illegalGenTypes = false;
 
     // initial render after TypeSelectors are mounted
     onMount(() => {
-        t2 = document.getElementById('type2').value;
-        t1 = document.getElementById('type1').value;
-        $gen = document.getElementById('genSelect').value;
+        $t1 = 'Bug'; $t2 = 'Bug';
+        document.getElementById('type2').value = $t2;
+        document.getElementById('type1').value = $t1;
+        $gen = '1';
+        document.getElementById('genSelect').value = $gen;
         genTypeEffectiveness = allGens[$gen];
         return typeUpdated('onMount');
 	});
@@ -248,9 +237,9 @@
     .filter(d => d[1] !== 1)
 
 
-    function genUpdated(event) {
+    function genUpdated() {
         genTypeEffectiveness = allGens[$gen];
-        return typeUpdated();
+        return updateDualType();
     };
 
     // alphabetic sort
@@ -262,17 +251,17 @@
 
     function updateDualType() {
         illegalGenTypes = false;
-        if ($gen == '1' && ( ['Steel','Dark','Fairy'].includes(t1) || ['Steel','Dark','Fairy'].includes(t2) ) ) {
+        if ($gen == '1' && ( ['Steel','Dark','Fairy'].includes($t1) || ['Steel','Dark','Fairy'].includes($t2) ) ) {
             illegalGenTypes = true;
-        } else if ($gen === '2-5' && ( t1 === 'Fairy' || t2 === 'Fairy' ) ) {
+        } else if ($gen === '2-5' && ( $t1 === 'Fairy' || $t2 === 'Fairy' ) ) {
             illegalGenTypes = true;
         };
         // calculate dual type weaknesses
-        let t2e = {...genTypeEffectiveness[t2]};
-        let t1e = {...genTypeEffectiveness[t1]};
+        let t2e = {...genTypeEffectiveness[$t2]};
+        let t1e = {...genTypeEffectiveness[$t1]};
 
         // if not dual typing
-        if ( t1 === t2 ) {
+        if ( $t1 === $t2 ) {
             dualType = t1e;
             return dualType;
         };
@@ -286,13 +275,11 @@
         uniqD.forEach(t => { t1Keys.includes(t) ? dualType[t] = t1e[t] : dualType[t] = t2e[t]; });
         // calculate common type effectiveness
         commonD.forEach(t => { dualType[t] =  t1e[t] * t2e[t]; });
+        console.log("dualtype ", dualType);
         return dualType;
     };
 
     function typeUpdated() {
-        // updates variables holding selected types and calls  updateDualType
-        t2 = document.getElementById('type2').value;
-        t1 = document.getElementById('type1').value;   
         return updateDualType();
     };
 </script>
@@ -304,7 +291,6 @@
     </div>
     <Selector on:genUpdate={genUpdated} on:typeUpdate={typeUpdated} />
     <div id='results-wrapper'>
-        <h3>Weaknesses and Resistances</h3>
         <div id='results'>
             {#if !illegalGenTypes && dualTypesSorted?.length}
                 {#each dualTypesSorted as [type, effectiveness]}
