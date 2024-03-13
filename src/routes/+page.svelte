@@ -14,10 +14,10 @@
     * {
         font-family: Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif;
         font-weight: normal;   
-        text-align: center;
+        text-align:start;
     }
 
-    h2, h3 {
+    h1, h2, h3 {
         margin: 8px;
         padding: 8px;
     }
@@ -27,7 +27,9 @@
         flex-direction: column;
         align-items: center;
         font-size: 14px;
-        background-color: $white;
+        // background-color: $white;
+        background: rgb(242,232,232);
+        background: radial-gradient(circle, rgba(242,232,232,1) 0%, rgba(90,125,124,1) 100%); 
         height: 100vh;
         width: 100vw;
     }
@@ -35,7 +37,7 @@
     #results {
         display: flex;
         flex-direction: row;
-        background-color:$blue;
+        // background-color:$blue;
         flex-wrap: wrap;
         justify-content: center;
         align-content: flex-start;
