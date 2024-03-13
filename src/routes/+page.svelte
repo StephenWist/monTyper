@@ -1,16 +1,4 @@
 <style lang='scss'>
-    /* Extra small devices (phones, less than 768px) */
-    /* No media query since this is the default in Bootstrap */
-
-    /* Small devices (tablets, 768px and up) */
-    // @media (min-width: 768px) { ... }
-
-    /* Medium devices (desktops, 992px and up) */
-    // @media (min-width: 992px) { ... }
-
-    /* Large devices (large desktops, 1200px and up) */
-    // @media (min-width: 1200px) { ... }
-
     * {
         font-family: Bahnschrift, 'DIN Alternate', 'Franklin Gothic Medium', 'Nimbus Sans Narrow', sans-serif-condensed, sans-serif;
         font-weight: normal;   
@@ -27,7 +15,6 @@
         flex-direction: column;
         align-items: center;
         font-size: 14px;
-        // background-color: $white;
         background: rgb(242,232,232);
         background: radial-gradient(circle, rgba(242,232,232,1) 0%, rgba(90,125,124,1) 100%); 
         height: 100vh;
@@ -37,12 +24,12 @@
     #results {
         display: flex;
         flex-direction: row;
-        // background-color:$blue;
         flex-wrap: wrap;
         justify-content: center;
         align-content: flex-start;
         column-gap: 8px;
         height: 100%;
+        max-width: 975px;
     }
 </style>
 

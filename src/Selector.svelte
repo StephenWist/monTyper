@@ -13,8 +13,9 @@
         justify-content: center;
         background-color: $mustard;
         flex-wrap: wrap;
-        // width: 100%;
-        // margin: 8px;
+        border: 1px solid black;
+        border-radius: 2px;
+        box-shadow: 1px 1px 1px black;
         row-gap: 10px;
         padding: 8px;
     }

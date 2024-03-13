@@ -20,6 +20,7 @@
         border: 5px;
         margin: 5px;
         padding: 5px;
+        vertical-align: middle;
     }
 
     select {
@@ -28,6 +29,11 @@
     border: 5px;
     margin: 5px 5px;
     border-radius: 5px;
+    }
+
+    div {
+        display: flex;
+        align-items: center;
     }
 </style>
 

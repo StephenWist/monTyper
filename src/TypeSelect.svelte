@@ -42,8 +42,14 @@
         border: 5px;
         margin: 5px;
         padding: 5px;
-        /* bring selects into line with gen select */
-        margin-left: 37px;
+        vertical-align: middle;
+        /* bring selects into line with gen select in smaller screens */
+        margin-left: 42px;
+    }
+
+    div {
+        display: flex;
+        align-items: center;
     }
 </style>
 
