@@ -19,7 +19,7 @@
                 '2-5':gen2_5,
                 '6+':gen6
             };
-
+ //
     function typeUpdate() {
         console.log(selected, id);
         if (id === 'type1') {
