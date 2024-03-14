@@ -13,9 +13,9 @@
         justify-content: center;
         background-color: $mustard;
         flex-wrap: wrap;
-        border: 1px solid black;
+        border: 0.5px solid black;
         border-radius: 2px;
-        box-shadow: 1px 1px 1px black;
+        box-shadow: 0.5px 0.5px 0.5px black;
         row-gap: 10px;
         padding: 8px;
     }

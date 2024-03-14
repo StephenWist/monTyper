@@ -39,12 +39,10 @@
 <style>
     label {
         font-size: 1.2em;
-        border: 5px;
+        border: 0.5px;
         margin: 5px;
         padding: 5px;
         vertical-align: middle;
-        /* bring selects into line with gen select in smaller screens */
-        margin-left: 42px;
     }
 
     div {

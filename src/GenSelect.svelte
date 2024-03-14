@@ -26,9 +26,9 @@
     select {
     font-size: 1.2em;
     padding: 5px;
-    border: 5px;
+    border: 0.5px;
     margin: 5px 5px;
-    border-radius: 5px;
+    border-radius: zpx;
     }
 
     div {
