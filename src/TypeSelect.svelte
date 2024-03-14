@@ -48,6 +48,7 @@
     }
 
     div {
+        flex-direction: column;
         display: flex;
         align-items: center;
     }

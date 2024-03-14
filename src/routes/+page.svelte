@@ -17,8 +17,9 @@
         font-size: 14px;
         background: rgb(242,232,232);
         background: radial-gradient(circle, rgba(242,232,232,1) 0%, rgba(90,125,124,1) 100%); 
-        height: 100%;
-        width: 100%;
+        min-height: 100vh;
+        min-width: 100vw;
+        background-attachment: fixed;
     }
 
     #results {
