@@ -11,7 +11,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: $mustard;
+        background-color: rgb(135,135,135);
         flex-wrap: wrap;
         border: 0.5px solid black;
         border-radius: 2px;
